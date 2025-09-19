@@ -2,12 +2,15 @@ import React from 'react'
 import { useRef, useState, useEffect } from 'react';
 import '../assets/css/login.css'
 import DashBoard from './DashBoard'
+import { Link } from 'react-router-dom'
 
 export default function Login() {
     const [isLoggedIN, setIsLoggedIn] = useState(false);
     const [isTyping, setIsTyping] = useState(false);
     const [loginState, setLoginState] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
     const usernameRef = useRef();
     const passwordRef = useRef();
@@ -72,6 +75,24 @@ export default function Login() {
     return (
         <>
             <div className="login-wrapper">
+                {/* Navbar */}
+                <nav className="navbar">
+                    <div className="nav-container">
+                        <div className="logo">🦠 COVID-19 HUB</div>
+                        <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
+                            <div className="links-container">
+                                <Link className="custom-link" to="/login">Login</Link>
+                                <Link className="custom-link" to="/signup">SignUp</Link>
+                                <Link className="custom-link" to="/login">DashBoard</Link>
+                            </div>
+                        </ul>
+                        <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </nav>
                 <div className="virus-particle virus1"></div>
                 <div className="virus-particle virus2"></div>
                 <div className="virus-particle virus3"></div>
@@ -113,7 +134,11 @@ export default function Login() {
                             }}
                         />
                     </form>
-
+                    <div className="login-link">
+                        <p>
+                            Don't Have Account? <Link to="/signup">SignUp here</Link>
+                        </p>
+                    </div>
                     {loginState === 'error' && (
                         <div style={{
                             color: '#ff4444',
@@ -140,6 +165,6 @@ export default function Login() {
 
                 </div>
             </div>
-            </>
-            );
+        </>
+    );
 }

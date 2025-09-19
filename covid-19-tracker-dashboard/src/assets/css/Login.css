@@ -46,6 +46,7 @@ button:focus-visible {
   box-shadow: 0 0 25px rgba(170, 170, 170, 0.6);
   padding: 40px 30px;
   backdrop-filter: blur(10px);
+  margin-top: 150px;
 }
 
 /* make form elements look nice */

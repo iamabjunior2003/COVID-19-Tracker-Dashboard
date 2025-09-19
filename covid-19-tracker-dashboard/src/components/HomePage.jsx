@@ -68,9 +68,11 @@ const HomePage = () => {
         <div className="nav-container">
           <div className="logo">🦠 COVID-19 HUB</div>
           <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
-           <Link to='/login'>Login</Link>
-           <Link to='/signup'>SignUp</Link>
-           <Link to='/login'>DashBoard</Link>
+            <div className="links-container">
+              <Link className="custom-link" to="/login">Login</Link>
+              <Link className="custom-link" to="/signup">SignUp</Link>
+              <Link className="custom-link" to="/login">DashBoard</Link>
+            </div>
           </ul>
           <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span></span>
@@ -87,7 +89,7 @@ const HomePage = () => {
         <div className="hero-content">
           <h1>COVID-19 INFORMATION HUB</h1>
           <p>
-            Stay informed with the latest COVID-19 updates, prevention guidelines, 
+            Stay informed with the latest COVID-19 updates, prevention guidelines,
             and health resources. Together we can fight the pandemic with knowledge and care.
           </p>
           <button className="cta-button" onClick={() => window.scrollTo({ top: 800, behavior: 'smooth' })}>
