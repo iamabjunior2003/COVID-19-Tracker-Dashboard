@@ -1,0 +1,507 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #000000 0%, #1b1b1b 100%);
+  overflow: hidden;
+  position: relative;
+}
+
+/* Animated covid particles background */
+body::before,
+body::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image:
+    radial-gradient(rgba(0,255,255,0.1) 2px, transparent 2px),
+    radial-gradient(rgba(255,0,0,0.1) 3px, transparent 3px),
+    radial-gradient(rgba(0,255,0,0.1) 1.5px, transparent 1.5px);
+  background-size: 80px 80px, 120px 120px, 60px 60px;
+  animation: moveParticles 60s linear infinite;
+  z-index: 0;
+}
+
+body::after {
+  animation-direction: reverse;
+  opacity: 0.5;
+}
+
+@keyframes moveParticles {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
+
+/* Big Corona Virus Particles */
+.virus-particle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #ff4444, #cc0000, #880000);
+  box-shadow: 
+    0 0 20px rgba(255, 68, 68, 0.6),
+    inset 0 0 15px rgba(255, 255, 255, 0.2);
+  z-index: 0;
+  transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Virus spikes */
+.virus-particle::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  right: -8px;
+  bottom: -8px;
+  border-radius: 50%;
+  background: 
+    /* Top spikes */
+    radial-gradient(4px 8px at 30px 0px, #ff6666, transparent),
+    radial-gradient(4px 8px at 45px 15px, #ff6666, transparent),
+    radial-gradient(4px 8px at 45px 45px, #ff6666, transparent),
+    radial-gradient(4px 8px at 30px 60px, #ff6666, transparent),
+    radial-gradient(4px 8px at 15px 45px, #ff6666, transparent),
+    radial-gradient(4px 8px at 0px 30px, #ff6666, transparent),
+    radial-gradient(4px 8px at 0px 15px, #ff6666, transparent),
+    radial-gradient(4px 8px at 15px 0px, #ff6666, transparent),
+    /* More spikes for realistic look */
+    radial-gradient(3px 6px at 52px 8px, #ff8888, transparent),
+    radial-gradient(3px 6px at 52px 38px, #ff8888, transparent),
+    radial-gradient(3px 6px at 52px 52px, #ff8888, transparent),
+    radial-gradient(3px 6px at 22px 52px, #ff8888, transparent),
+    radial-gradient(3px 6px at 8px 52px, #ff8888, transparent),
+    radial-gradient(3px 6px at 8px 22px, #ff8888, transparent),
+    radial-gradient(3px 6px at 8px 8px, #ff8888, transparent),
+    radial-gradient(3px 6px at 38px 8px, #ff8888, transparent);
+  animation: virusSpikes 4s ease-in-out infinite;
+}
+
+/* Individual virus particles */
+.virus1 {
+  top: 20%;
+  left: 10%;
+  animation: virusFloat1 15s ease-in-out infinite;
+}
+
+.virus2 {
+  top: 60%;
+  right: 15%;
+  animation: virusFloat2 18s ease-in-out infinite;
+  animation-delay: -5s;
+}
+
+.virus3 {
+  bottom: 25%;
+  left: 15%;
+  animation: virusFloat3 20s ease-in-out infinite;
+  animation-delay: -10s;
+}
+
+.virus4 {
+  top: 15%;
+  right: 25%;
+  animation: virusFloat4 16s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+.virus5 {
+  bottom: 15%;
+  right: 35%;
+  animation: virusFloat5 22s ease-in-out infinite;
+  animation-delay: -8s;
+}
+
+/* Virus floating animations */
+@keyframes virusFloat1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(30px, -20px) rotate(90deg) scale(1.1); }
+  50% { transform: translate(-20px, -40px) rotate(180deg) scale(0.9); }
+  75% { transform: translate(-40px, 20px) rotate(270deg) scale(1.05); }
+}
+
+@keyframes virusFloat2 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(-25px, 30px) rotate(72deg) scale(0.95); }
+  40% { transform: translate(-50px, -15px) rotate(144deg) scale(1.08); }
+  60% { transform: translate(20px, -35px) rotate(216deg) scale(0.92); }
+  80% { transform: translate(35px, 25px) rotate(288deg) scale(1.03); }
+}
+
+@keyframes virusFloat3 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  30% { transform: translate(40px, -25px) rotate(108deg) scale(1.12); }
+  60% { transform: translate(-30px, -50px) rotate(216deg) scale(0.88); }
+  90% { transform: translate(-20px, 30px) rotate(324deg) scale(1.06); }
+}
+
+@keyframes virusFloat4 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(-35px, 40px) rotate(-90deg) scale(0.94); }
+  50% { transform: translate(25px, 35px) rotate(-180deg) scale(1.09); }
+  75% { transform: translate(45px, -30px) rotate(-270deg) scale(0.96); }
+}
+
+@keyframes virusFloat5 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(30px, 25px) rotate(-72deg) scale(1.04); }
+  40% { transform: translate(-40px, 40px) rotate(-144deg) scale(0.91); }
+  60% { transform: translate(-25px, -20px) rotate(-216deg) scale(1.1); }
+  80% { transform: translate(20px, -45px) rotate(-288deg) scale(0.97); }
+}
+
+/* Virus spikes animation */
+@keyframes virusSpikes {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.1); }
+}
+
+/* Virus particles react to typing */
+.typing .virus-particle {
+  transform: scale(1.5) !important;
+  animation-duration: 2s;
+  box-shadow: 
+    0 0 40px rgba(255, 68, 68, 0.9),
+    inset 0 0 25px rgba(255, 255, 255, 0.4);
+  filter: brightness(1.3);
+}
+
+.typing .virus-particle::before {
+  animation-duration: 1s;
+  transform: scale(1.2);
+}
+
+/* Cartoon eyes for viruses */
+.virus-particle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  width: 20px;
+  height: 8px;
+  background: 
+    radial-gradient(circle at 25% 50%, #000 2px, transparent 2px),
+    radial-gradient(circle at 75% 50%, #000 2px, transparent 2px);
+  background-size: 10px 8px;
+  background-repeat: no-repeat;
+  background-position: 0 0, 10px 0;
+  animation: virusEyeBlink 6s ease-in-out infinite;
+}
+
+@keyframes virusEyeBlink {
+  0%, 90%, 100% { height: 8px; }
+  95% { height: 1px; }
+}
+
+/* Container */
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 500px;
+  background: rgba(15, 15, 15, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(170, 170, 170, 0.6);
+  padding: 60px 50px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 1s ease-in-out;
+  transition: all 0.3s ease;
+}
+
+/* Container glow when typing */
+.typing .login-container {
+  box-shadow: 
+    0 0 40px rgba(255, 68, 68, 0.4),
+    0 0 80px rgba(255, 68, 68, 0.2);
+  border: 2px solid rgba(255, 68, 68, 0.3);
+}
+
+/* Heading */
+.login-container h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 25px;
+  text-align: center;
+  text-shadow: 0 0 15px rgba(75, 75, 75, 0.6);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Heading effect when typing */
+.typing .login-container h1 {
+  color: #ff6666;
+  text-shadow: 
+    0 0 20px rgba(255, 102, 102, 0.8),
+    0 0 40px rgba(255, 68, 68, 0.4);
+  transform: scale(1.05);
+}
+
+/* Label + input */
+.login-container label {
+  display: block;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-bottom: 5px;
+  transition: all 0.3s ease;
+}
+
+.typing .login-container label {
+  color: #ff8888;
+  text-shadow: 0 0 10px rgba(255, 136, 136, 0.5);
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #222;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 15px rgba(75, 75, 75, 0.6);
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+  background-color: #111;
+  box-shadow: 
+    0 0 15px rgba(255, 68, 68, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(255, 68, 68, 0.5);
+  transform: scale(1.02);
+}
+
+/* Submit button */
+.login-container input[type="submit"] {
+  width: 100%;
+  background: linear-gradient(45deg, #353535, #6a6b6b);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(75, 75, 75, 0.6);
+}
+
+.login-container input[type="submit"]:hover {
+  background: linear-gradient(45deg, #ff4444, #ff6666);
+  box-shadow: 
+    0 0 25px rgba(255, 68, 68, 0.6),
+    0 0 50px rgba(255, 68, 68, 0.3);
+  transform: scale(1.05);
+  color: #ffffff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  0% {opacity: 0; transform: translateY(-20px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .login-container {
+    padding: 30px 20px;
+  }
+
+  .login-container h1 {
+    font-size: 1.8rem;
+  }
+
+  .virus-particle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .virus-particle::before {
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
+  }
+}
+
+/* Virus particles attack login box when login fails */
+@keyframes virusAttack1 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(100px, 50px) rotate(45deg) scale(1.3); }
+  40% { transform: translate(200px, 100px) rotate(90deg) scale(1.5); }
+  50% { transform: translate(220px, 120px) rotate(120deg) scale(1.6); }
+  60% { transform: translate(200px, 100px) rotate(90deg) scale(1.5); }
+  80% { transform: translate(100px, 50px) rotate(45deg) scale(1.3); }
+  100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+@keyframes virusAttack2 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(-100px, 50px) rotate(-45deg) scale(1.3); }
+  40% { transform: translate(-200px, 100px) rotate(-90deg) scale(1.5); }
+  50% { transform: translate(-220px, 120px) rotate(-120deg) scale(1.6); }
+  60% { transform: translate(-200px, 100px) rotate(-90deg) scale(1.5); }
+  80% { transform: translate(-100px, 50px) rotate(-45deg) scale(1.3); }
+  100% { transform: translate(0, 0) rotate(-360deg) scale(1); }
+}
+
+@keyframes virusAttack3 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(50px, -80px) rotate(60deg) scale(1.2); }
+  40% { transform: translate(100px, -160px) rotate(120deg) scale(1.4); }
+  50% { transform: translate(120px, -180px) rotate(150deg) scale(1.5); }
+  60% { transform: translate(100px, -160px) rotate(120deg) scale(1.4); }
+  80% { transform: translate(50px, -80px) rotate(60deg) scale(1.2); }
+  100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+@keyframes virusAttack4 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(-50px, -80px) rotate(-60deg) scale(1.2); }
+  40% { transform: translate(-100px, -160px) rotate(-120deg) scale(1.4); }
+  50% { transform: translate(-120px, -180px) rotate(-150deg) scale(1.5); }
+  60% { transform: translate(-100px, -160px) rotate(-120deg) scale(1.4); }
+  80% { transform: translate(-50px, -80px) rotate(-60deg) scale(1.2); }
+  100% { transform: translate(0, 0) rotate(-360deg) scale(1); }
+}
+
+@keyframes virusAttack5 {
+  0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  20% { transform: translate(0px, 100px) rotate(90deg) scale(1.3); }
+  40% { transform: translate(0px, 200px) rotate(180deg) scale(1.5); }
+  50% { transform: translate(0px, 220px) rotate(210deg) scale(1.6); }
+  60% { transform: translate(0px, 200px) rotate(180deg) scale(1.5); }
+  80% { transform: translate(0px, 100px) rotate(90deg) scale(1.3); }
+  100% { transform: translate(0, 0) rotate(360deg) scale(1); }
+}
+
+/* Login box shake during attack */
+@keyframes loginBoxShake {
+  0%, 100% { transform: translateX(0) translateY(0) rotate(0deg); }
+  10% { transform: translateX(-10px) translateY(-5px) rotate(-1deg); }
+  20% { transform: translateX(10px) translateY(5px) rotate(1deg); }
+  30% { transform: translateX(-10px) translateY(-5px) rotate(-1deg); }
+  40% { transform: translateX(10px) translateY(5px) rotate(1deg); }
+  50% { transform: translateX(-8px) translateY(-3px) rotate(-0.5deg); }
+  60% { transform: translateX(8px) translateY(3px) rotate(0.5deg); }
+  70% { transform: translateX(-5px) translateY(-2px) rotate(-0.3deg); }
+  80% { transform: translateX(5px) translateY(2px) rotate(0.3deg); }
+  90% { transform: translateX(-2px) translateY(-1px) rotate(-0.1deg); }
+}
+
+/* Attack animation styles */
+.login-error .virus1 {
+  animation: virusAttack1 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+  z-index: 5;
+}
+
+.login-error .virus2 {
+  animation: virusAttack2 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-delay: 0.2s;
+  filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+  z-index: 5;
+}
+
+.login-error .virus3 {
+  animation: virusAttack3 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-delay: 0.4s;
+  filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+  z-index: 5;
+}
+
+.login-error .virus4 {
+  animation: virusAttack4 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-delay: 0.6s;
+  filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+  z-index: 5;
+}
+
+.login-error .virus5 {
+  animation: virusAttack5 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation-delay: 0.8s;
+  filter: hue-rotate(0deg) brightness(1.5) saturate(1.5);
+  z-index: 5;
+}
+
+/* Login container gets attacked */
+.login-error .login-container {
+  animation: loginBoxShake 3s ease-in-out;
+  box-shadow: 
+    0 0 60px rgba(255, 0, 0, 0.8),
+    0 0 120px rgba(255, 0, 0, 0.4),
+    inset 0 0 30px rgba(255, 0, 0, 0.2);
+  border: 3px solid rgba(255, 0, 0, 0.6);
+  background: rgba(15, 15, 15, 0.98);
+}
+
+/* Virus spikes become more aggressive during attack */
+.login-error .virus-particle::before {
+  animation: aggressiveSpikes 0.3s ease-in-out infinite;
+}
+
+@keyframes aggressiveSpikes {
+  0%, 100% { transform: rotate(0deg) scale(1.2); }
+  50% { transform: rotate(180deg) scale(1.4); }
+}
+
+/* Virus eyes become angry during attack */
+.login-error .virus-particle::after {
+  background: 
+    /* Angry eyebrows */
+    linear-gradient(45deg, #000 2px, transparent 2px, transparent 4px, #000 6px, transparent 6px),
+    linear-gradient(-45deg, #000 2px, transparent 2px, transparent 4px, #000 6px, transparent 6px),
+    /* Angry eyes */
+    radial-gradient(circle at 25% 60%, #ff0000 2px, transparent 2px),
+    radial-gradient(circle at 75% 60%, #ff0000 2px, transparent 2px);
+  background-size: 8px 4px, 8px 4px, 10px 8px, 10px 8px;
+  background-position: 2px 0, 10px 0, 0 2px, 10px 2px;
+  background-repeat: no-repeat;
+  height: 12px;
+  transform: translate(-50%, -70%);
+}
+
+/* Success animation */
+@keyframes virusHappy {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.3) rotate(360deg); }
+}
+
+.login-success .virus-particle {
+  animation: virusHappy 1s ease-in-out;
+  filter: hue-rotate(120deg) brightness(1.4);
+}
+
+.login-success .virus-particle::after {
+  background: 
+    radial-gradient(circle at 25% 40%, #000 2px, transparent 2px),
+    radial-gradient(circle at 75% 40%, #000 2px, transparent 2px),
+    linear-gradient(90deg, transparent 4px, #000 4px, #000 8px, transparent 8px);
+  background-size: 10px 8px, 10px 8px, 12px 2px;
+  background-position: 0 0, 10px 0, 4px 6px;
+}
