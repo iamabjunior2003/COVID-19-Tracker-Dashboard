@@ -71,73 +71,75 @@ export default function Login() {
 
     return (
         <>
-            <div className="virus-particle virus1"></div>
-            <div className="virus-particle virus2"></div>
-            <div className="virus-particle virus3"></div>
-            <div className="virus-particle virus4"></div>
-            <div className="virus-particle virus5"></div>
+            <div className="login-wrapper">
+                <div className="virus-particle virus1"></div>
+                <div className="virus-particle virus2"></div>
+                <div className="virus-particle virus3"></div>
+                <div className="virus-particle virus4"></div>
+                <div className="virus-particle virus5"></div>
 
-            <div className="login-container">
-                <h1>Corona Login</h1>
-                <form onSubmit={onSubmit}>
-                    <label>
-                        Username:
+                <div className="login-container">
+                    <h1>Corona Login</h1>
+                    <form onSubmit={onSubmit}>
+                        <label>
+                            Username:
+                            <input
+                                ref={usernameRef}
+                                type="text"
+                                placeholder="Enter username"
+                                onChange={handleInputChange}
+                                onFocus={handleInputChange}
+                                disabled={isLoading}
+                            />
+                        </label>
+                        <label>
+                            Password:
+                            <input
+                                ref={passwordRef}
+                                type="password"
+                                placeholder="Enter password"
+                                onChange={handleInputChange}
+                                onFocus={handleInputChange}
+                                disabled={isLoading}
+                            />
+                        </label>
                         <input
-                            ref={usernameRef}
-                            type="text"
-                            placeholder="Enter username"
-                            onChange={handleInputChange}
-                            onFocus={handleInputChange}
+                            type="submit"
+                            value={isLoading ? "Authenticating..." : "LOGIN"}
                             disabled={isLoading}
+                            style={{
+                                opacity: isLoading ? 0.7 : 1,
+                                cursor: isLoading ? 'not-allowed' : 'pointer'
+                            }}
                         />
-                    </label>
-                    <label>
-                        Password:
-                        <input
-                            ref={passwordRef}
-                            type="password"
-                            placeholder="Enter password"
-                            onChange={handleInputChange}
-                            onFocus={handleInputChange}
-                            disabled={isLoading}
-                        />
-                    </label>
-                    <input
-                        type="submit"
-                        value={isLoading ? "Authenticating..." : "LOGIN"}
-                        disabled={isLoading}
-                        style={{
-                            opacity: isLoading ? 0.7 : 1,
-                            cursor: isLoading ? 'not-allowed' : 'pointer'
-                        }}
-                    />
-                </form>
+                    </form>
 
-                {loginState === 'error' && (
-                    <div style={{
-                        color: '#ff4444',
-                        textAlign: 'center',
-                        marginTop: '15px',
-                        fontSize: '0.9rem',
-                        fontWeight: '500'
-                    }}>
-                        ❌ Invalid credentials! Viruses are angry!
-                    </div>
-                )}
+                    {loginState === 'error' && (
+                        <div style={{
+                            color: '#ff4444',
+                            textAlign: 'center',
+                            marginTop: '15px',
+                            fontSize: '0.9rem',
+                            fontWeight: '500'
+                        }}>
+                            ❌ Invalid credentials! Viruses are angry!
+                        </div>
+                    )}
 
-                {loginState === 'success' && (
-                    <div style={{
-                        color: '#44ff44',
-                        textAlign: 'center',
-                        marginTop: '15px',
-                        fontSize: '0.9rem',
-                        fontWeight: '500'
-                    }}>
-                        ✅ Login successful! Viruses are happy!
-                    </div>
-                )}
+                    {loginState === 'success' && (
+                        <div style={{
+                            color: '#44ff44',
+                            textAlign: 'center',
+                            marginTop: '15px',
+                            fontSize: '0.9rem',
+                            fontWeight: '500'
+                        }}>
+                            ✅ Login successful! Viruses are happy!
+                        </div>
+                    )}
 
+                </div>
             </div>
-        </>
-    );
+            </>
+            );
 }

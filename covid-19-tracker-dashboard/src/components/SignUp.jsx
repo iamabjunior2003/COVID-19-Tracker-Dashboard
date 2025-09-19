@@ -13,13 +13,15 @@ export default function SignUp() {
     };
 
     return (
-        <div>
+        <div className="login-wrapper">
+            {/* virus particles */}
             <div className="virus-particle virus1"></div>
             <div className="virus-particle virus2"></div>
             <div className="virus-particle virus3"></div>
             <div className="virus-particle virus4"></div>
             <div className="virus-particle virus5"></div>
 
+            {/* form */}
             <div className="login-container">
                 <h1>Corona Registration</h1>
                 <form onSubmit={handleSubmit}>
