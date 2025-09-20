@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../assets/css/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,6 @@ export default function SignUp() {
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-    // Form data state
     const [signupData, setSignupData] = useState({
         fullname: '',
         email: '',
@@ -17,8 +16,13 @@ export default function SignUp() {
         confirmPassword: ''
     });
 
-    // Validation error state
     const [errors, setErrors] = useState({});
+    const [userList, setUserList] = useState([]);
+
+    useEffect(() => {
+        const storedUsers = JSON.parse(localStorage.getItem('UserData')) || [];
+        setUserList(storedUsers);
+    }, []);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -27,17 +31,24 @@ export default function SignUp() {
             [name]: value
         });
     };
-
+    
     const validate = () => {
         const newErrors = {};
 
-        if (!signupData.fullname.trim()) newErrors.fullname = 'Full name is required';
-        if (!/\S+@\S+\.\S+/.test(signupData.email)) newErrors.email = 'Invalid email address';
-        if (!signupData.username.trim()) newErrors.username = 'Username is required';
-        if (!signupData.age || signupData.age < 18) newErrors.age = 'You must be at least 18 years old';
-        if (!/^\d{10}$/.test(signupData.phone)) newErrors.phone = 'Phone number must be 10 digits';
-        if (signupData.password.length < 6) newErrors.password = 'Password must be at least 6 characters';
-        if (signupData.password !== signupData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
+        if (!signupData.fullname.trim())
+            newErrors.fullname = 'Full name is required';
+        if (!/\S+@\S+\.\S+/.test(signupData.email))
+            newErrors.email = 'Invalid email address';
+        if (!signupData.username.trim())
+            newErrors.username = 'Username is required';
+        if (!signupData.age || signupData.age < 18)
+            newErrors.age = 'You must be at least 18 years old';
+        if (!/^\d{10}$/.test(signupData.phone))
+            newErrors.phone = 'Phone number must be 10 digits';
+        if (signupData.password.length < 6)
+            newErrors.password = 'Password must be at least 6 characters';
+        if (signupData.password !== signupData.confirmPassword)
+            newErrors.confirmPassword = 'Passwords do not match';
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -46,11 +57,18 @@ export default function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validate()) {
-            console.log('Form Data:', signupData); // you can send it to API here
+
+            const storedUsers = JSON.parse(localStorage.getItem('UserData')) || [];
+            const updatedUsers = [...storedUsers, signupData];
+
+            localStorage.setItem('UserData', JSON.stringify(updatedUsers));
+            setUserList(updatedUsers);
+            console.log('Stored UserData:', updatedUsers);
+
             navigate('/dashboard');
         }
     };
-
+  
     return (
         <div className="login-wrapper">
             {/* Navbar */}
@@ -59,25 +77,35 @@ export default function SignUp() {
                     <div className="logo">🦠 COVID-19 HUB</div>
                     <ul className={`nav-menu ${isMenuOpen ? 'active' : ''}`}>
                         <div className="links-container">
-                            <Link className="custom-link" to="/login">Login</Link>
-                            <Link className="custom-link" to="/signup">SignUp</Link>
-                            <Link className="custom-link" to="/login">DashBoard</Link>
+                            <Link className="custom-link" to="/login">
+                                Login
+                            </Link>
+                            <Link className="custom-link" to="/signup">
+                                SignUp
+                            </Link>
+                            <Link className="custom-link" to="/dashboard">
+                                DashBoard
+                            </Link>
                         </div>
                     </ul>
-                    <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                    <div
+                        className="menu-toggle"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
                 </div>
             </nav>
+
             {/* virus particles */}
             <div className="virus-particle virus1"></div>
             <div className="virus-particle virus2"></div>
             <div className="virus-particle virus3"></div>
             <div className="virus-particle virus4"></div>
             <div className="virus-particle virus5"></div>
-        
+
             {/* form */}
             <div className="login-container">
                 <h1>Corona Registration</h1>
@@ -150,7 +178,9 @@ export default function SignUp() {
                         onChange={handleInputChange}
                         required
                     />
-                    {errors.confirmPassword && <span className="error">{errors.confirmPassword}</span>}
+                    {errors.confirmPassword && (
+                        <span className="error">{errors.confirmPassword}</span>
+                    )}
 
                     <button type="submit">Sign Up</button>
                 </form>

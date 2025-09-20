@@ -6,6 +6,9 @@ import DashBoard from './components/DashBoard'
 import SignUp from './components/SignUp'
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './components/HomePage'
+import AllTimeData from './components/AllTimeData'
+import History from './components/History'
+import CountryData from './components/CountryData'
 
 
 function App() {
@@ -17,7 +20,11 @@ function App() {
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashBoard />} />
+        <Route path="/dashboard" element={<DashBoard />}>
+          <Route path="alldata" element={<AllTimeData />} />
+          <Route path="history" element={<History />} />
+          <Route path="countrydata" element={<CountryData />} />
+        </Route>
       </Routes>
     </>
   )
