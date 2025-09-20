@@ -2,10 +2,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import axios from 'axios'
+import { Link, Outlet } from 'react-router-dom'
+import "../assets/css/dashboard.css"
 
-export default function DashBoard() {
-
+export default function DashBoard({ user }) {
     const [alldata, setAllData] = useState([]);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
     useEffect(() => {
         fetch('https://disease.sh/v3/covid-19/all')
             .then(res => res.json())
@@ -40,21 +43,42 @@ export default function DashBoard() {
             countryData();
         }
     }, [])
-    
+
     return (
-        <div>
-            <h1>Hey:) This is Dashboard</h1>
-            <div>
-                <h2>User Details: </h2>
-                <div>Cases : {alldata.cases}</div>
-                <div>Deaths: {alldata.deaths}</div>
-                <div>Recovered: {alldata.recovered}</div>
-                <div>Active: {alldata.active}</div>
-                <div>Critical: {alldata.critical}</div>
-                <div>Tests: {alldata.tests}</div>
-                <div>Population: {alldata.population}</div>
-                <div>Updated: {new Date(alldata.updated).toLocaleString()}</div>
-            </div>
+        <div className="login-wrapper">
+            {/* Navbar */}
+            <nav className="navbar">
+                <div className="nav-container">
+
+                    <div className="logo">🦠 COVID-19 HUB</div>
+
+                    <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+                        <div className="links-container">
+                            <Link className="custom-link" to="alldata">All Time Data</Link>
+                            <Link className="custom-link" to="history">History</Link>
+                            <Link className="custom-link" to="countrydata">Country Data</Link>
+                        </div>
+                    </ul>
+
+                    <div
+                        className="menu-toggle"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    {/* User Avatar */}
+                    {user && (
+                        <div className="user-avatar">
+                            {user.fullname.charAt(0).toUpperCase()}
+                        </div>
+                    )}
+
+                </div>
+            </nav>
+
+            <Outlet />
         </div>
     )
 }
