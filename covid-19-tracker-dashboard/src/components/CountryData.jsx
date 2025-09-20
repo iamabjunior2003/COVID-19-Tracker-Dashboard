@@ -3,6 +3,8 @@ import axios from 'axios';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area, ScatterChart, Scatter } from 'recharts';
 import { Globe, Users, AlertTriangle, TrendingUp, MapPin, Search, Filter } from 'lucide-react';
 import '../assets/css/alltimedata.css';
+import { Link } from 'react-router-dom'
+
 
 export default function CountryData() {
     const [countryData, setCountryData] = useState([]);
@@ -11,6 +13,9 @@ export default function CountryData() {
     const [searchTerm, setSearchTerm] = useState('');
     const [sortBy, setSortBy] = useState('cases');
     const [showTop, setShowTop] = useState(20);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const user = JSON.parse(localStorage.getItem('currentUser')) || { name: "Guest" };
+
 
     useEffect(() => {
         const fetchCountryData = async () => {
@@ -163,6 +168,36 @@ export default function CountryData() {
 
     return (
         <div className="dashboard-container">
+             <nav className="navbar">
+                <div className="nav-container">
+
+                    <div className="logo">🦠 COVID-19 HUB</div>
+
+                    <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+                        <div className="links-container">
+                            <Link className="custom-link" to="/alldata">All Time Data</Link>
+                            <Link className="custom-link" to="/history">History</Link>
+                            <Link className="custom-link" to="/countrydata">Country Data</Link>
+                        </div>
+                    </ul>
+
+                    <div
+                        className="menu-toggle"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    {/* User Avatar */}
+                    {user && (
+                        <div className="user-avatar">
+                            {user.fullname.charAt(0).toUpperCase()}
+                        </div>
+                    )}
+
+                </div>
+            </nav>
             <div className="dashboard-content">
                 {/* Header */}
                 <div className="header">

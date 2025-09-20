@@ -54,9 +54,9 @@ export default function DashBoard({ user }) {
 
                     <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
                         <div className="links-container">
-                            <Link className="custom-link" to="/dashboard/alldata">All Time Data</Link>
-                            <Link className="custom-link" to="/dashboard/history">History</Link>
-                            <Link className="custom-link" to="/dashboard/countrydata">Country Data</Link>
+                            <Link className="custom-link" to="/alldata">All Time Data</Link>
+                            <Link className="custom-link" to="/history">History</Link>
+                            <Link className="custom-link" to="/countrydata">Country Data</Link>
                         </div>
                     </ul>
 

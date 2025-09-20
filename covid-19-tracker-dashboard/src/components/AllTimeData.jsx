@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, LineChart, Line, AreaChart, Area } from 'recharts';
 import { Activity, Users, AlertTriangle, TrendingUp, Globe, Calendar } from 'lucide-react';
+import { Link } from 'react-router-dom'
 import '../assets/css/alltimedata.css';
 
 export default function AllTimeData() {
     const [alldata, setAllData] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const user = JSON.parse(localStorage.getItem('currentUser')) || { name: "Guest" };
 
     useEffect(() => {
         fetch('https://disease.sh/v3/covid-19/all')
@@ -104,6 +107,36 @@ export default function AllTimeData() {
 
     return (
         <div className="dashboard-container">
+         <nav className="navbar">
+                <div className="nav-container">
+
+                    <div className="logo">🦠 COVID-19 HUB</div>
+
+                    <ul className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
+                        <div className="links-container">
+                            <Link className="custom-link" to="/alldata">All Time Data</Link>
+                            <Link className="custom-link" to="/history">History</Link>
+                            <Link className="custom-link" to="/countrydata">Country Data</Link>
+                        </div>
+                    </ul>
+
+                    <div
+                        className="menu-toggle"
+                        onClick={() => setIsMenuOpen(!isMenuOpen)}
+                    >
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    {/* User Avatar */}
+                    {user && (
+                        <div className="user-avatar">
+                            {user.fullname.charAt(0).toUpperCase()}
+                        </div>
+                    )}
+
+                </div>
+            </nav>
             <div className="dashboard-content">
                 {/* Header */}
                 <div className="header">
