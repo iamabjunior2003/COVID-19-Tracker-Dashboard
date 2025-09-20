@@ -10,8 +10,7 @@ const HomePage = () => {
     recovered: '680M+',
     vaccinated: '5.5B+'
   });
-
-  // Generate floating particles
+  
   const particles = Array.from({ length: 20 }, (_, i) => (
     <div
       key={i}
